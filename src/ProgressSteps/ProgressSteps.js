@@ -65,12 +65,13 @@ class ProgressSteps extends Component {
   };
 
   render() {
+
     const styles = {
       stepIcons: {
         position: 'relative',
         justifyContent: 'space-evenly',
         alignSelf: 'center',
-        flexDirection: 'row',
+        flexDirection: this.props.direction === 'vertical' ? 'row' : 'column',
         top: this.props.topOffset,
         marginBottom: this.props.marginBottom,
       },
@@ -78,7 +79,9 @@ class ProgressSteps extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.stepIcons}>{this.renderStepIcons()}</View>
+        <View style={styles.stepIcons}>
+          {this.renderStepIcons()}
+        </View>
         <View style={{ flex: 1 }}>
           {React.cloneElement(this.props.children[this.state.activeStep], {
             setActiveStep: this.setActiveStep,
@@ -103,6 +106,7 @@ ProgressSteps.defaultProps = {
   activeStep: 0,
   topOffset: 30,
   marginBottom: 50,
+  direction: 'horizontal'
 };
 
 export default ProgressSteps;
